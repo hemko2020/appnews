@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:newsapp/Data/Data.dart';
 import 'package:newsapp/Models/Category_models.dart';
@@ -43,21 +41,19 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: Container(
-        width: 500,
-        height: 1000,
-        child: Column(
-          children: [
-            ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return CategoryTile(
-                    imageUrl: categories[index].imageUrl,
-                    categoryName: categories[index].categoryName,
-                  );
-                }),
-          ],
+        height: 70,
+        child: SizedBox(
+          height: 300,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: categories.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return CategoryTile(
+                  imageUrl: categories[index].imageUrl,
+                  categoryName: categories[index].categoryName,
+                );
+              }),
         ),
       ),
     );
@@ -71,13 +67,29 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(right: 3, left: 5),
+      padding: EdgeInsets.only(top: 10),
       child: Stack(
         children: [
-          Image.network(
-            imageUrl,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(6),
+            child: Image.network(
+              imageUrl,
+              width: 120,
+              height: 60,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Container(
             width: 120,
             height: 60,
-            fit: BoxFit.cover,
+            color: Colors.black26,
+            child: Text(
+              categoryName,
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
         ],
       ),
